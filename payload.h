@@ -51,4 +51,29 @@ typedef struct {
     int32_t checksum;
 } udp_data_t;
 
+#pragma pack(1)
+struct IMU_Data_quat {
+uint16_t frame_header; //帧头0XFECF
+uint16_t reserved; //预留
+
+
+float ax; //加速度计X轴方向原始数据,单位为g
+float ay; 
+float az;
+
+float wx;//陀螺仪X轴方向原始数据,单位rad/s
+float wy;
+float wz;
+
+float q0;//四元数
+float q1;
+float q2;
+float q3;
+uint32_t timestamp;//相对时间戳，单位为10us
+
+uint32_t crc32_checksum;//crc32位校验和
+};
+#pragma pack()
+
+
 #endif

@@ -26,7 +26,7 @@ int main() {
 
     int sockfd;
     struct sockaddr_in server_addr;
-    udp_data_t packet;
+    IMU_Data_quat packet;
     int seq = 0;
 
     sockfd = socket(AF_INET, SOCK_DGRAM, 0);
@@ -37,7 +37,7 @@ int main() {
 
     memset(&server_addr, 0, sizeof(server_addr));
     server_addr.sin_family = AF_INET;
-    server_addr.sin_port = htons(8888); 
+    server_addr.sin_port = htons(8840); 
     server_addr.sin_addr.s_addr = inet_addr("192.168.3.39"); 
 
     struct timespec ts;
@@ -45,6 +45,7 @@ int main() {
     ts.tv_nsec = 1000000L; 
     
     while (1) {
+        packet.crc32_checksum++;
         if (sendto(sockfd, &packet, sizeof(packet), 0, (struct sockaddr*)&server_addr, sizeof(server_addr)) < 0) {
             perror("sendto failed");
             exit(EXIT_FAILURE);

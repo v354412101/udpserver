@@ -8,5 +8,7 @@ add_executable(udpserver main.cpp UDPServer.cpp)
 
 add_executable(udpclient UDPClient.cpp)
 
+add_executable(udp_imu_client UDPIMUClient.cpp)
+
 target_link_libraries(udpserver spdlog pthread)
 target_link_libraries(udpclient spdlog)
