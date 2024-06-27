@@ -41,11 +41,11 @@ public:
 
     bool init();
 
-    bool revice_data(UDPData& udp_data);
+    bool receive(UDPData& udp_data);
 
-    bool revice_imu(ImuData& udp_imu);
+    bool receive(ImuData& udp_imu);
 
-    bool send_cmd(UDPCmd& udp_cmd);
+    bool send(const UDPCmd& udp_cmd);
 
     void loop();
 
@@ -56,8 +56,8 @@ private:
 
     Config config_;
 
-    std::shared_ptr<SPSCQueue<UDPData>> udp_data_q_;
-    std::shared_ptr<SPSCQueue<ImuData>> udp_imu_q_;
+    SPSCQueue<UDPData> udp_data_q_;
+    SPSCQueue<ImuData> udp_imu_q_;
     int udp_data_sock_fd_ = -1;
     int udp_cmd_sock_fd_ = -1;
     std::uint64_t pre_send_data_time_ = 0;

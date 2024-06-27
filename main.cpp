@@ -30,7 +30,7 @@ int main(int argc, char** argv) {
     //     int32_t pre_checksum = 0;
     //     while(true) {
     //         UDPData udpdata;
-    //         ret = udpserver->revice_data(udpdata);
+    //         ret = udpserver->receive(udpdata);
     //         if (ret) {
     //             if(udpdata != nullptr) {
     //                 //spdlog::info("udpdata: checksum {}", udpdata->checksum);
@@ -53,7 +53,7 @@ int main(int argc, char** argv) {
         while(true) {
             UDPCmd udp_cmd = std::make_shared<udp_cmd_t>();
             udp_cmd->checksum = seq++;
-            ret = udpserver->send_cmd(udp_cmd);
+            ret = udpserver->send(udp_cmd);
             std::this_thread::sleep_for(std::chrono::milliseconds(1));
         }
     }).detach();
